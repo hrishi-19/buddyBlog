@@ -43,9 +43,14 @@ import { connect } from 'react-redux'
         )
     }
 }
+const mapStateToprops=(state)=>{
+    return{
+     auth:state.firebase.auth
+    }
+ }
 const mapDispathToProps=(dispatch)=>{
     return{
         createProject:(project)=>dispatch(createProject(project))
     }
 }
-export default connect(null,mapDispathToProps)(CreateProject)
+export default connect(mapStateToprops,mapDispathToProps)(CreateProject)

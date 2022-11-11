@@ -1,14 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import ProjectList from "../projects/projectlist";
 import Notifications from "./notifications";
+import { useNavigate } from "react-router-dom";
 import { compose } from "redux";
 import { connect, } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
-class Dashboard extends Component {
+const Dashboard=(props)=> {
 
-    render() {
-        const {projects}=this.props
+        const {projects,auth}=props
+        const navigate=useNavigate()
+
+        if(!auth.uid)return navigate('/signin')
         return (
             <div className="dashboard container">
                 <div className="row">
@@ -21,11 +24,12 @@ class Dashboard extends Component {
                 </div>
             </div>
         )
-    }
+    
 }
 const mapStateToprops=(state)=>{
    return{
-    projects:state.firestore.ordered.projects
+    projects:state.firestore.ordered.projects,
+    auth:state.firebase.auth
    }
 }
 export default compose(
