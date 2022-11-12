@@ -10,18 +10,16 @@ import { useNavigate } from 'react-router-dom'
         title: "",
         content:""
     })
-    const {auth}=props.auth
-
    const handleChange = (e) => {
         setState({...state, [e.target.id]: e.target.value })
     }
     const handleSumit = (e) => {
         e.preventDefault()
-        console.log(state)
         props.createProject(state)
+        navigate('/')
     }
     
-        if(!auth.uid)return navigate('/signin')
+       
         return (
             <div className="container">
                 <form className="white" onSubmit={handleSumit}>

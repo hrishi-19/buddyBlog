@@ -9,15 +9,17 @@ import ProjectDetails from "./components/projects/projectdetails"
 
 function App() {
   return (
-    <div className="App">
+    <div className="App relative w-full ">
      <Navbar/>
-      <Routes>
-      <Route path="/" exact element={<Dashboard/>}/>
-      <Route path="/project/:id" element={<ProjectDetails/>}/>
-      <Route path="/signin" element={<SignIn/>}/>
-      <Route path="/signUp" element={<SignUp/>}/>
-      <Route path="/create" element={<CreateProject/>}/>
-      </Routes>
+     <div className='py-16'>
+     <Routes>
+     <Route path="/" exact element={<Dashboard/>}/>
+     <Route path="/project/:id" element={<ProjectDetails/>}/>
+     <Route path="/signin" element={<SignIn/>}/>
+     <Route path="/signUp" element={<SignUp/>}/>
+     <Route path="/create" element={<CreateProject/>}/>
+     </Routes>
+     </div>
     </div>
   );
 }
