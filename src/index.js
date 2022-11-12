@@ -23,7 +23,7 @@ const rrfConfig = {
 const store = createStore(rootReducer, 
     compose(
         applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
-        reduxFirestore(firebase)
+        reduxFirestore(firebase,{useFirestoreForProfile:true,userProfile:'user'})
     )
     );
 

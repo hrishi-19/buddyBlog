@@ -29,12 +29,14 @@ const Dashboard=(props)=> {
 const mapStateToprops=(state)=>{
    return{
     projects:state.firestore.ordered.projects,
-    auth:state.firebase.auth
+    auth:state.firebase.auth,
+   
    }
 }
 export default compose(
     connect(mapStateToprops),
     firestoreConnect([
-        {collection:"projects"}
+        {collection:"projects"},
+        {collection:"user"}
     ])
 )(Dashboard)

@@ -1,39 +1,43 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { signIn } from '../../store/actions/authAction'
 
 
- class SignIn extends Component {
 
-    state = {
+ const SignIn =(props)=> {
+    const navigate=useNavigate()
+    const[state,setState]=useState({
         email:"",
         password:"",
-    }
-    handleChange=(e)=>{
-       this.setState({
-        [e.target.id]:e.target.value
+    })
+   
+    const handleChange=(e)=>{
+       setState({
+       ...state, [e.target.id]:e.target.value
        })
     }
-    handleSumit=(e)=>{
+    const handleSumit=(e)=>{
         e.preventDefault()
-       this.props.signIn(this.state)
+        props.signIn(state)
         
     }
     
-    render() {
-        const {authError}=this.props
+   
+        const {authError,auth}=props
+        if(auth.uid)return navigate('/')
         return (
             <div className="container">
-                <form  className="white" onSubmit={this.handleSumit}>
+                <form  className="white" onSubmit={handleSumit}>
                 <h5 className="grey-text text-darken-3"> signin</h5>
                         <div className="input-field">
                             <label htmlFor='email'>Email</label>
-                            <input type="email" id="email" onChange={this.handleChange}></input>
+                            <input type="email" id="email" onChange={handleChange}></input>
 
                         </div>
                         <div className="input-field">
                             <label htmlFor='password'>Password</label>
-                            <input type="password" id="password" onChange={this.handleChange}></input>
+                            <input type="password" id="password" onChange={handleChange}></input>
 
                         </div>
                         <div className="input-field">
@@ -47,11 +51,12 @@ import { signIn } from '../../store/actions/authAction'
                 }</div>
             </div>
         )
-    }
+    
 }
 const mapStatetoprops=(state)=>{
     return{
-        authError:state.auth.authError
+        authError:state.auth.authError,
+        auth:state.firebase.auth
     }
 }
 const mapDispatchToprops=(dispatch)=>{
