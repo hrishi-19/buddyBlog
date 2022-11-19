@@ -5,63 +5,95 @@ import { signIn } from '../../store/actions/authAction'
 
 
 
- const SignIn =(props)=> {
-    const navigate=useNavigate()
-    const[state,setState]=useState({
-        email:"",
-        password:"",
+const SignIn = (props) => {
+    const navigate = useNavigate()
+    const [state, setState] = useState({
+        email: "",
+        password: "",
     })
-   
-    const handleChange=(e)=>{
-       setState({
-       ...state, [e.target.id]:e.target.value
-       })
+
+    const handleChange = (e) => {
+        setState({
+            ...state, [e.target.id]: e.target.value
+        })
     }
-    const handleSumit=(e)=>{
+    const handleSumit = (e) => {
         e.preventDefault()
         props.signIn(state)
-        
+
     }
-    
-   
-        const {authError,auth}=props
-        if(auth.uid)return navigate('/')
-        return (
-            <div className="container">
-                <form  className="white" onSubmit={handleSumit}>
-                <h5 className="grey-text text-darken-3"> signin</h5>
-                        <div className="input-field">
-                            <label htmlFor='email'>Email</label>
-                            <input type="email" id="email" onChange={handleChange}></input>
 
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor='password'>Password</label>
-                            <input type="password" id="password" onChange={handleChange}></input>
 
+    const { authError, auth } = props
+    if (auth.uid) return navigate('/')
+    return (
+        <div>
+            <section>
+                <div className="container px-6 py-12 h-full">
+                    <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+                        <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
+                            <img
+                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                                className="w-full"
+                                alt="Phone image"
+                            />
                         </div>
-                        <div className="input-field">
-                        <button className="btn pink">Login</button>
+                        <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
+                            <form onSubmit={handleSumit}>
+
+                                <div className="mb-6">
+                                    <input
+                                        type="email"
+                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        placeholder="Email address"
+                                        id='email'
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+
+                                <div className="mb-6">
+                                    <input
+                                        type="password"
+                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        placeholder="Password"
+                                        id="password"
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <button
+                                    type="submit"
+                                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                                    data-mdb-ripple="true"
+                                    data-mdb-ripple-color="light"
+                                >
+                                    Sign in
+                                </button>
+
+
+                            </form>
                         </div>
-                    
-                </form>
-                <div className='red-text center'>
+                    </div>
+                </div>
+            </section>
+            <div classNameName='red-text center'>
                 {
-                    authError?<p>{authError}</p>:null
+                    authError ? <p>{authError}</p> : null
                 }</div>
-            </div>
-        )
-    
+        </div>
+    )
+
 }
-const mapStatetoprops=(state)=>{
-    return{
-        authError:state.auth.authError,
-        auth:state.firebase.auth
+const mapStatetoprops = (state) => {
+    return {
+        authError: state.auth.authError,
+        auth: state.firebase.auth
     }
 }
-const mapDispatchToprops=(dispatch)=>{
-    return{
-        signIn:(creds)=>dispatch(signIn(creds))
+const mapDispatchToprops = (dispatch) => {
+    return {
+        signIn: (creds) => dispatch(signIn(creds))
     }
 }
-export default connect(mapStatetoprops,mapDispatchToprops)(SignIn)
+export default connect(mapStatetoprops, mapDispatchToprops)(SignIn)
+

@@ -9,9 +9,9 @@ import ProjectDetails from "./components/projects/projectdetails"
 
 function App() {
   return (
-    <div className="App relative w-full ">
+    <div className="App relative w-full">
      <Navbar/>
-     <div className='py-16'>
+     <div>
      <Routes>
      <Route path="/" exact element={<Dashboard/>}/>
      <Route path="/project/:id" element={<ProjectDetails/>}/>
